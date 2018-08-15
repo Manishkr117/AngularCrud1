@@ -1,0 +1,161 @@
+<form #employeeForm='ngForm' ngNativeValidate (ngSubmit)="saveEmployee(employeeForm)">
+<div class='panel panel-primary' >
+    <div class='panel-heading'>
+      <h3 class='panel-title'>Create Employee</h3>
+    </div>
+    <div class='panel-body'>
+      <div class='form-group' [class.has-error]='fullNameControl.invalid && fullNameControl.touched' [class.has-success]='fullNameControl.valid' >
+        <label for='fullName' class='control-label'>Full Name</label>
+        <input type='text' required class='form-control' id="fullName" name='fullName' [(ngModel)]='fullName' #fullNameControl='ngModel'        >
+        <span class='help-block' *ngIf='fullNameControl.invalid && fullNameControl.touched'>
+          FullName is required
+        </span>
+      </div>
+      <tr>
+        <td>
+      <div>
+        touched {{fullNameControl.touched}}
+      </div>
+      <div>
+          untouched {{fullNameControl.untouched}}
+        </div>
+      </td>
+    <td>
+        <div>
+            pristine {{fullNameControl.pristine}}
+          </div>
+          <div>
+              dirty {{fullNameControl.dirty}}
+            </div>
+          </td>
+        <td>
+            <div>
+                valid {{fullNameControl.valid}}
+              </div>
+              <div>
+                  invalid {{fullNameControl.invalid}}
+                </div>
+              </td>
+              </tr>
+<label>Form Lavel</label>
+              <tr>
+                  <td>
+                <div>
+                  touched {{employeeForm.touched}}
+                </div>
+                <div>
+                    untouched {{employeeForm.untouched}}
+                  </div>
+                </td>
+              <td>
+                  <div>
+                      pristine {{employeeForm.pristine}}
+                    </div>
+                    <div>
+                        dirty {{employeeForm.dirty}}
+                      </div>
+                    </td>
+                  <td>
+                      <div>
+                          valid {{employeeForm.valid}}
+                        </div>
+                        <div>
+                            invalid {{employeeForm.invalid}}
+                          </div>
+                        </td>
+                        </tr>
+      <div class='form-group'>
+          <label for="email">Email</label>
+          <input type='text' class='form-control' id="email" name='email' [(ngModel)]='email'>
+        </div>
+
+        <div class='form-group'>
+            <label for="phNo">Phone No</label>
+            <input type='text' class='form-control' id="phNo" name='phNo' [(ngModel)]='phNo'>
+          </div>
+
+        
+          <div class='form-group'>
+              <label>Contact Preference</label>
+              <div class="form-control">
+                <label class="radio-inline">
+                  <input type="radio" value='email'  name='contactPref' [(ngModel)]='contactPref'  >
+                  Phone 
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value='Phone' name='contactPref' [(ngModel)]='contactPref'>
+                    Email 
+                  </label>
+              </div>
+            </div>
+
+        <div class='form-group'>
+            <label>Gender</label>
+            <div class="form-control">
+              <label class="radio-inline">
+                <input type="radio" value='male'  name='gender' [(ngModel)]='gender'>
+                Male 
+              </label>
+              <label class="radio-inline">
+                  <input type="radio" value='female' name='gender' [(ngModel)]='gender'>
+                  Female 
+                </label>
+            </div>
+          </div>
+
+          <div class='form-group'>
+              <div class="form-control">
+                <label class="checkbox-inline">
+                  <input type="checkbox"  name='isActive' [(ngModel)]='isActive'>
+                  Is Active 
+                </label>
+              </div>
+            </div>
+
+            <div class='form-group'>
+                  <label for='department'>
+                    Department
+                  </label>
+                <select id='department' name='department' [(ngModel)]='department' class='form-control'>
+                  <option *ngFor='let department of departments' [value]='department.id'>
+                    {{department.name}}
+                  </option>
+                  <!-- <option value='1'>HelpDesk</option>
+                  <option value='2'>HR</option>
+                  <option value='3'>IT</option> -->
+                </select>                
+            </div>
+          
+            <div class='form-group'>
+                <label for="DOB">DOB</label>
+                <input type='date' class='form-control' id="dob" name='dob' [(ngModel)]='dob'>
+              </div>
+
+              <div class='form-group'>
+                  <label for="DOB">DOB</label>
+                  <input type='text'  class='form-control' id="dob2" name='dob2' [(ngModel)]='dob2'>
+                </div>
+
+                <div class='form-group'>
+                  
+                  <button type='button'  class='btn btn-primary' (click)='togglePhotoPreview()'>
+                    {{buttonText}}
+                    </button>
+                </div>
+
+                <div class='form-group'>
+                  <label for="DOB">Photo Path</label>
+                  <input type='text'  class='form-control' id="photoPath" name='photoPath' [(ngModel)]='photoPath'>
+                </div>
+
+                <div class='form-group '>
+                  <img class='imageClass' [src]=photoPath height="200px" width="200px" *ngIf='previewPhoto'>
+                </div>
+    </div>
+    <div class='panel-footer'>
+        <button type='submit' class="btn btn-primary" [disabled]='employeeForm.invalid'>Save</button>
+      </div>
+</div>
+</form>
+
+{{employeeForm.value | json}}
